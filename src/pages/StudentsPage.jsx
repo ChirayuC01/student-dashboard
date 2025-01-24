@@ -17,7 +17,7 @@ const StudentsPage = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editStudentId, setEditStudentId] = useState(null);
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
-  const [isSideBarOpen, setIsSideBarOpen] = useState(true);
+  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
   const [viewStudent, setViewStudent] = useState(null);
   const [students, setStudents] = useState([]);
   const [formData, setFormData] = useState({
@@ -201,26 +201,51 @@ const StudentsPage = () => {
     }
   };
 
+  const handleSideBar = async () => {
+    setIsSideBarOpen((prev) => !prev);
+  };
+
   return (
     <div className="flex flex-col sm:flex-row h-screen">
-      <aside className="w-full sm:w-60 bg-gradient-to-b from-gray-900 to-gray-800 text-white flex flex-col shadow-lg">
-        <div className="p-6 text-center text-2xl font-bold tracking-wide border-b border-gray-700">
-          Dashboard
+      <aside className="w-full sm:w-60 bg-gradient-to-b from-gray-900 to-gray-800 text-white flex flex-col shadow-lg relative">
+        <div
+          className={`flex justify-between items-center pr-3 border-b border-gray-700`}
+        >
+          <div className="flex items-center gap-2 p-6 text-center text-2xl font-bold tracking-wide ">
+            <Gauge /> Dashboard
+          </div>
+          <AlignJustify className="md:hidden" onClick={handleSideBar} />
         </div>
-        <nav className="flex-grow space-y-2 mt-4">
+        <nav className="hidden md:block flex-grow space-y-2 mt-4 py-2 relative">
           <button
             onClick={() => navigate("/students")}
-            className="w-full px-4 py-2 text-left text-gray-300 hover:bg-gray-700 cursor-pointer hover:text-white transition-colors duration-300"
+            className="flex items-center gap-2 w-full px-4 py-2 text-left text-gray-300 hover:bg-gray-700 cursor-pointer hover:text-white transition-colors duration-300"
           >
-            Students Page
+            <BookUser /> Students Page
           </button>
           <button
             onClick={handleLogout}
-            className="w-full px-4 py-2 text-left cursor-pointer text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
+            className="flex items-center justify-center gap-2 w-full px-4 py-2 text-left cursor-pointer text-white bg-red-700 hover:bg-red-600 hover:text-white transition-colors duration-300 absolute bottom-0"
           >
-            Logout
+            <LogOut /> Logout
           </button>
         </nav>
+        {isSideBarOpen && (
+          <nav className="flex flex-col space-y-2 mt-4 pt-2">
+            <button
+              onClick={() => navigate("/students")}
+              className="flex items-center    gap-2 w-full px-4 py-2 text-left text-gray-300 hover:bg-gray-700 cursor-pointer hover:text-white transition-colors duration-300"
+            >
+              <BookUser /> Students Page
+            </button>
+            <button
+              onClick={handleLogout}
+              className="flex items-center justify-center  gap-2 w-full px-4 py-2 text-left cursor-pointer text-white bg-red-700 hover:bg-red-600 hover:text-white transition-colors duration-300"
+            >
+              <LogOut /> Logout
+            </button>
+          </nav>
+        )}
       </aside>
 
       <main className="flex-grow px-2 lg:px-8 py-8  bg-gray-100">
@@ -228,9 +253,9 @@ const StudentsPage = () => {
           <h1 className="text-3xl font-bold text-gray-800">Students List</h1>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="cursor-pointer px-6 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300"
+            className="flex items-center gap-2 cursor-pointer px-6 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300"
           >
-            Add Student
+            <Plus /> Add Student
           </button>
         </div>
 
@@ -245,7 +270,9 @@ const StudentsPage = () => {
                 <th className=" px-4 py-2 text-sm font-semibold">
                   Roll Number
                 </th>
-                <th className=" px-4 py-2 text-sm font-semibold">Action</th>
+                <th className=" px-4 py-2 text-sm font-semibold text-center">
+                  Action
+                </th>
               </tr>
             </thead>
             <tbody>
