@@ -201,70 +201,90 @@ const StudentsPage = () => {
 
   return (
     <div className="flex flex-col sm:flex-row h-screen">
-      <aside className="w-full sm:w-60 bg-gray-800 text-white flex flex-col">
-        <div className="p-4 text-center text-xl font-bold">Dashboard</div>
-        <nav className="flex-grow">
+      <aside className="w-full sm:w-60 bg-gradient-to-b from-gray-900 to-gray-800 text-white flex flex-col shadow-lg">
+        <div className="p-6 text-center text-2xl font-bold tracking-wide border-b border-gray-700">
+          Dashboard
+        </div>
+        <nav className="flex-grow space-y-2 mt-4">
           <button
             onClick={() => navigate("/students")}
-            className="w-full px-4 py-2 text-left hover:bg-gray-700"
+            className="w-full px-4 py-2 text-left text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
           >
             Students Page
           </button>
           <button
             onClick={handleLogout}
-            className="w-full px-4 py-2 text-left hover:bg-gray-700"
+            className="w-full px-4 py-2 text-left text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
           >
             Logout
           </button>
         </nav>
       </aside>
 
-      <main className="flex-grow p-6">
-        <div className="flex justify-between items-center mb-4">
-          <h1 className="text-2xl font-bold">Students List</h1>
+      <main className="flex-grow p-8 bg-gray-100">
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-3xl font-bold text-gray-800">Students List</h1>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            className="px-6 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300"
           >
             Add Student
           </button>
         </div>
-        <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border border-gray-200 ">
-            <thead>
+
+        <div className="overflow-x-auto rounded-lg shadow-lg bg-white">
+          <table className="min-w-full text-left border-collapse border border-gray-200">
+            <thead className="bg-gray-800 text-white">
               <tr>
-                <th className="border px-4 py-2">ID</th>
-                <th className="border px-4 py-2">Name</th>
-                <th className="border px-4 py-2">Class</th>
-                <th className="border px-4 py-2">Section</th>
-                <th className="border px-4 py-2">Roll Number</th>
-                <th className="border px-4 py-2">Action</th>
+                <th className=" px-4 py-2 text-sm font-semibold">ID</th>
+                <th className=" px-4 py-2 text-sm font-semibold">Name</th>
+                <th className=" px-4 py-2 text-sm font-semibold">Class</th>
+                <th className=" px-4 py-2 text-sm font-semibold">Section</th>
+                <th className=" px-4 py-2 text-sm font-semibold">
+                  Roll Number
+                </th>
+                <th className=" px-4 py-2 text-sm font-semibold">Action</th>
               </tr>
             </thead>
             <tbody>
               {students.map((student, index) => (
-                <tr key={student.id} className="hover:bg-gray-100">
-                  <td className="border px-4 py-2">{index + 1}</td>
-                  <td className="border px-4 py-2">{`${student.firstName} ${student.lastName}`}</td>
-                  <td className="border px-4 py-2">{student.class}</td>
-                  <td className="border px-4 py-2">{student.section}</td>
-                  <td className="border px-4 py-2">{student.rollNumber}</td>
-                  <td className="border px-4 py-2 space-y-2 sm:space-x-2 ">
+                <tr
+                  key={student.id}
+                  className={`hover:bg-gray-200 transition-colors duration-300 ${
+                    index % 2 === 0 ? "bg-[#f2f2f2]" : "bg-white"
+                  }`}
+                >
+                  <td className=" px-4 py-4 text-sm text-gray-700">
+                    {index + 1}
+                  </td>
+                  <td className=" px-4 py-4 text-sm text-gray-700">
+                    {`${student.firstName} ${student.lastName}`}
+                  </td>
+                  <td className=" px-4 py-4 text-sm text-gray-700">
+                    {student.class}
+                  </td>
+                  <td className=" px-4 py-4 text-sm text-gray-700">
+                    {student.section}
+                  </td>
+                  <td className=" px-4 py-4 text-sm text-gray-700">
+                    {student.rollNumber}
+                  </td>
+                  <td className=" px-4 py-4 flex gap-2 justify-center">
                     <button
                       onClick={() => handleView(student)}
-                      className="px-2 py-1 bg-green-600 text-white rounded hover:bg-green-700"
+                      className="px-3 py-1 bg-green-500 text-white text-xs font-medium rounded-lg hover:bg-green-600 transition-colors duration-300"
                     >
                       View
                     </button>
                     <button
                       onClick={() => handleEdit(student)}
-                      className="px-2 py-1 bg-yellow-600 text-white rounded hover:bg-yellow-700"
+                      className="px-3 py-1 bg-yellow-500 text-white text-xs font-medium rounded-lg hover:bg-yellow-600 transition-colors duration-300"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => confirmDelete(student)}
-                      className="px-2 py-1 bg-red-600 text-white rounded hover:bg-red-700"
+                      className="px-3 py-1 bg-red-500 text-white text-xs font-medium rounded-lg hover:bg-red-600 transition-colors duration-300"
                     >
                       Delete
                     </button>
@@ -275,10 +295,13 @@ const StudentsPage = () => {
           </table>
         </div>
 
-        {/* Add/Edit Student Modal */}
+        {/* Modals */}
         {isModalOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-            <div className="bg-white p-6 rounded w-[80%] lg:w-[60%] h-[95%] sm:h-fit overflow-y-auto">
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+            style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}
+          >
+            <div className="bg-white p-6 rounded-lg shadow-lg w-[80%] lg:w-[60%] h-[95%] sm:h-fit overflow-y-auto">
               <h2 className="text-xl font-bold mb-4">
                 {isEditing ? "Edit Student" : "Add Student"}
               </h2>
@@ -442,8 +465,11 @@ const StudentsPage = () => {
 
         {/* View Student Modal */}
         {isViewModalOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center ">
-            <div className="bg-white p-6 rounded w-[90%] lg:w-1/2 h-[90%] lg:h-fit overflow-y-auto ">
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center "
+            style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}
+          >
+            <div className="bg-white p-6 rounded-lg shadow-lg w-[90%] lg:w-1/2 h-[90%] lg:h-fit overflow-y-auto">
               <h2 className="text-xl font-bold mb-4">Student Details</h2>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 {Object.entries(viewStudent || {}).map(([key, value]) => (
@@ -469,10 +495,13 @@ const StudentsPage = () => {
 
         {/* Delete Confirmation Dialog */}
         {isDeleteDialogOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-            <div className="bg-white p-6 rounded w-[90%] sm:w-1/3">
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+            style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}
+          >
+            <div className="bg-white p-6 rounded-lg shadow-lg w-[90%] sm:w-1/3">
               <h2 className="text-xl font-bold mb-4">Confirm Delete</h2>
-              <p>
+              <p className="text-gray-700">
                 Are you sure you want to delete
                 <strong>
                   {" "}
@@ -483,13 +512,13 @@ const StudentsPage = () => {
               <div className="flex justify-end mt-4 space-x-2">
                 <button
                   onClick={() => setIsDeleteDialogOpen(false)}
-                  className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
+                  className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors duration-300"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleDelete}
-                  className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-300"
                 >
                   Delete
                 </button>
