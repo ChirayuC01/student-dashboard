@@ -10,12 +10,14 @@ import {
   updateDoc,
   deleteDoc,
 } from "firebase/firestore";
+import { BookUser, Plus, LogOut, Gauge, AlignJustify } from "lucide-react";
 
 const StudentsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editStudentId, setEditStudentId] = useState(null);
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
+  const [isSideBarOpen, setIsSideBarOpen] = useState(true);
   const [viewStudent, setViewStudent] = useState(null);
   const [students, setStudents] = useState([]);
   const [formData, setFormData] = useState({
@@ -208,25 +210,25 @@ const StudentsPage = () => {
         <nav className="flex-grow space-y-2 mt-4">
           <button
             onClick={() => navigate("/students")}
-            className="w-full px-4 py-2 text-left text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
+            className="w-full px-4 py-2 text-left text-gray-300 hover:bg-gray-700 cursor-pointer hover:text-white transition-colors duration-300"
           >
             Students Page
           </button>
           <button
             onClick={handleLogout}
-            className="w-full px-4 py-2 text-left text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
+            className="w-full px-4 py-2 text-left cursor-pointer text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
           >
             Logout
           </button>
         </nav>
       </aside>
 
-      <main className="flex-grow p-8 bg-gray-100">
+      <main className="flex-grow px-2 lg:px-8 py-8  bg-gray-100">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-bold text-gray-800">Students List</h1>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="px-6 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300"
+            className="cursor-pointer px-6 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300"
           >
             Add Student
           </button>
@@ -272,19 +274,19 @@ const StudentsPage = () => {
                   <td className=" px-4 py-4 flex gap-2 justify-center">
                     <button
                       onClick={() => handleView(student)}
-                      className="px-3 py-1 bg-green-500 text-white text-xs font-medium rounded-lg hover:bg-green-600 transition-colors duration-300"
+                      className="cursor-pointer px-3 py-1 bg-green-500 text-white text-xs font-medium rounded-lg hover:bg-green-600 transition-colors duration-300"
                     >
                       View
                     </button>
                     <button
                       onClick={() => handleEdit(student)}
-                      className="px-3 py-1 bg-yellow-500 text-white text-xs font-medium rounded-lg hover:bg-yellow-600 transition-colors duration-300"
+                      className="cursor-pointer px-3 py-1 bg-yellow-500 text-white text-xs font-medium rounded-lg hover:bg-yellow-600 transition-colors duration-300"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => confirmDelete(student)}
-                      className="px-3 py-1 bg-red-500 text-white text-xs font-medium rounded-lg hover:bg-red-600 transition-colors duration-300"
+                      className="cursor-pointer px-3 py-1 bg-red-500 text-white text-xs font-medium rounded-lg hover:bg-red-600 transition-colors duration-300"
                     >
                       Delete
                     </button>
@@ -446,13 +448,13 @@ const StudentsPage = () => {
                     <button
                       type="button"
                       onClick={handleCancel}
-                      className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
+                      className="cursor-pointer px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition-colors duration-300"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
-                      className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                      className="cursor-pointer px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors duration-300"
                     >
                       {isEditing ? "Update" : "Submit"}
                     </button>
@@ -484,7 +486,7 @@ const StudentsPage = () => {
               <div className="flex justify-end mt-4">
                 <button
                   onClick={() => setIsViewModalOpen(false)}
-                  className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
+                  className="cursor-pointer px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition-colors duration-300"
                 >
                   Close
                 </button>
