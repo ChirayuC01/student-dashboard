@@ -437,147 +437,78 @@ const StudentsPage = () => {
             className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
             style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}
           >
-            <div className="bg-white p-6 rounded-lg shadow-lg w-[80%] lg:w-[60%] h-[95%] sm:h-fit overflow-y-auto">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-[80%] lg:w-[60%] h-[95%] sm:h-fit flex flex-col">
               <h2 className="text-xl font-bold mb-4">
                 {isEditing ? "Edit Student" : "Add Student"}
               </h2>
-              <form onSubmit={handleFormSubmit} className="space-y-4">
-                <div className="overflow-y-auto flex flex-col gap-1">
-                  <div className="flex flex-col sm:grid sm:grid-cols-3">
-                    <label className="text-sm font-bold mb-1">First Name</label>
-                    <input
-                      type="text"
-                      name="firstName"
-                      value={formData.firstName}
-                      onChange={handleInputChange}
-                      className="border px-2 py-1 rounded col-span-2"
-                    />
-                  </div>
-                  <div className="flex flex-col sm:grid sm:grid-cols-3">
-                    <label className="text-sm font-bold mb-1">
-                      Middle Name
-                    </label>
-                    <input
-                      type="text"
-                      name="middleName"
-                      value={formData.middleName}
-                      onChange={handleInputChange}
-                      className="border px-2 py-1 rounded col-span-2"
-                    />
-                  </div>
-                  <div className="flex flex-col sm:grid sm:grid-cols-3">
-                    <label className="text-sm font-bold mb-1">Last Name</label>
-                    <input
-                      type="text"
-                      name="lastName"
-                      value={formData.lastName}
-                      onChange={handleInputChange}
-                      className="border px-2 py-1 rounded col-span-2"
-                    />
-                  </div>
-                  <div className="flex flex-col sm:grid sm:grid-cols-3">
-                    <label className="text-sm font-bold mb-1">Gender</label>
-                    <select
-                      name="gender"
-                      value={formData.gender}
-                      onChange={handleInputChange}
-                      className="border px-2 py-1 rounded col-span-2"
+              <form
+                onSubmit={handleFormSubmit}
+                className="space-y-4 flex-grow overflow-y-auto"
+              >
+                <div className="flex flex-col gap-1">
+                  {[
+                    { label: "First Name", name: "firstName", type: "text" },
+                    { label: "Middle Name", name: "middleName", type: "text" },
+                    { label: "Last Name", name: "lastName", type: "text" },
+                    {
+                      label: "Gender",
+                      name: "gender",
+                      type: "select",
+                      options: ["Male", "Female"],
+                    },
+                    { label: "Date of Birth", name: "dob", type: "date" },
+                    {
+                      label: "Contact Number",
+                      name: "contactNumber",
+                      type: "number",
+                    },
+                    { label: "Email", name: "email", type: "email" },
+                    { label: "Address", name: "address", type: "text" },
+                    { label: "Class", name: "class", type: "text" },
+                    { label: "Section", name: "section", type: "text" },
+                    {
+                      label: "Roll Number",
+                      name: "rollNumber",
+                      type: "number",
+                    },
+                    {
+                      label: "Admission Date",
+                      name: "admissionDate",
+                      type: "date",
+                    },
+                  ].map((field, index) => (
+                    <div
+                      key={index}
+                      className="flex flex-col sm:grid sm:grid-cols-3"
                     >
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                    </select>
-                  </div>
-                  <div className="flex flex-col sm:grid sm:grid-cols-3">
-                    <label className="text-sm font-bold mb-1">
-                      Date of Birth
-                    </label>
-                    <input
-                      type="date"
-                      name="dob"
-                      value={formData.dob}
-                      onChange={handleInputChange}
-                      className="border px-2 py-1 rounded col-span-2"
-                    />
-                  </div>
-                  <div className="flex flex-col sm:grid sm:grid-cols-3">
-                    <label className="text-sm font-bold mb-1">
-                      Contact Number
-                    </label>
-                    <input
-                      type="number"
-                      name="contactNumber"
-                      value={formData.contactNumber}
-                      onChange={handleInputChange}
-                      className="border px-2 py-1 rounded col-span-2"
-                    />
-                  </div>
-                  <div className="flex flex-col sm:grid sm:grid-cols-3">
-                    <label className="text-sm font-bold mb-1">Email</label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className="border px-2 py-1 rounded col-span-2"
-                    />
-                  </div>
-                  <div className="flex flex-col sm:grid sm:grid-cols-3">
-                    <label className="text-sm font-bold mb-1">Address</label>
-                    <input
-                      type="text"
-                      name="address"
-                      value={formData.address}
-                      onChange={handleInputChange}
-                      className="border px-2 py-1 rounded col-span-2"
-                    />
-                  </div>
-
-                  <div className="flex flex-col sm:grid sm:grid-cols-3">
-                    <label className="text-sm font-bold mb-1">Class</label>
-                    <input
-                      type="text"
-                      name="class"
-                      value={formData.class}
-                      onChange={handleInputChange}
-                      className="border px-2 py-1 rounded col-span-2"
-                    />
-                  </div>
-                  <div className="flex flex-col sm:grid sm:grid-cols-3">
-                    <label className="text-sm font-bold mb-1">Section</label>
-                    <input
-                      type="text"
-                      name="section"
-                      value={formData.section}
-                      onChange={handleInputChange}
-                      className="border px-2 py-1 rounded col-span-2"
-                    />
-                  </div>
-                  <div className="flex flex-col sm:grid sm:grid-cols-3">
-                    <label className="text-sm font-bold mb-1">
-                      Roll Number
-                    </label>
-                    <input
-                      type="number"
-                      name="rollNumber"
-                      value={formData.rollNumber}
-                      onChange={handleInputChange}
-                      className="border px-2 py-1 rounded col-span-2"
-                    />
-                  </div>
-
-                  <div className="flex flex-col sm:grid sm:grid-cols-3">
-                    <label className="text-sm font-bold mb-1">
-                      Admission Date
-                    </label>
-                    <input
-                      type="date"
-                      name="admissionDate"
-                      value={formData.admissionDate}
-                      onChange={handleInputChange}
-                      className="border px-2 py-1 rounded col-span-2"
-                    />
-                  </div>
-                  <div className="flex justify-end space-x-2">
+                      <label className="text-sm font-bold mb-1">
+                        {field.label}
+                      </label>
+                      {field.type === "select" ? (
+                        <select
+                          name={field.name}
+                          value={formData[field.name]}
+                          onChange={handleInputChange}
+                          className="border px-2 py-1 rounded col-span-2"
+                        >
+                          {field.options.map((option, idx) => (
+                            <option key={idx} value={option}>
+                              {option}
+                            </option>
+                          ))}
+                        </select>
+                      ) : (
+                        <input
+                          type={field.type}
+                          name={field.name}
+                          value={formData[field.name]}
+                          onChange={handleInputChange}
+                          className="border px-2 py-1 rounded col-span-2"
+                        />
+                      )}
+                    </div>
+                  ))}
+                  <div className="sticky bottom-0 left-0 w-full bg-white border-t border-gray-200 py-4 flex justify-end space-x-2">
                     <button
                       type="button"
                       onClick={handleCancel}
@@ -604,14 +535,14 @@ const StudentsPage = () => {
             className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
             style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}
           >
-            <div className="bg-white p-6 rounded-lg shadow-lg w-[90%] lg:w-1/2 max-h-[90%] overflow-y-auto">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-[90%] lg:w-1/2 max-h-[90%] overflow-y-auto flex flex-col">
               <h2 className="text-xl font-bold mb-4 text-gray-800 border-b pb-2 border-gray-200 flex items-center gap-2">
                 Student Details{" "}
                 <p className="text-slate-500 font-extralight text-[15px]">
                   (ID: {viewStudent.id})
                 </p>
               </h2>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 flex-grow">
                 {[
                   "firstName",
                   "lastName",
@@ -640,10 +571,10 @@ const StudentsPage = () => {
                   </div>
                 ))}
               </div>
-              <div className="flex justify-end mt-4 pt-4 border-t border-gray-200">
+              <div className="sticky bottom-0 left-0 w-full bg-white border-t border-gray-200 py-4 mt-4">
                 <button
                   onClick={() => setIsViewModalOpen(false)}
-                  className="cursor-pointer px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition-colors duration-300"
+                  className="cursor-pointer px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition-colors duration-300 float-right"
                 >
                   Close
                 </button>
