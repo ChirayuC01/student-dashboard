@@ -11,6 +11,7 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import { BookUser, Plus, LogOut, Gauge, AlignJustify } from "lucide-react";
+import { toast } from "react-toastify";
 
 const StudentsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -72,23 +73,68 @@ const StudentsPage = () => {
 
     // Basic validation for required fields
     if (!formData.firstName.trim() || !formData.lastName.trim()) {
-      alert("First Name and Last Name are required.");
+      toast.error("First Name and Last Name are required.", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       return;
     }
     if (!formData.class.trim() || !formData.section.trim()) {
-      alert("Class and Section are required.");
+      toast.error("Class and Section are required.", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       return;
     }
     if (!formData.rollNumber.trim()) {
-      alert("Roll Number is required.");
+      toast.error("Roll Number is required.", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       return;
     }
     if (formData.contactNumber.length !== 10 || isNaN(formData.contactNumber)) {
-      alert("Contact Number must be a valid 10-digit number.");
+      toast.error("Contact Number must be a valid 10-digit number.", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       return;
     }
     if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
-      alert("Please enter a valid email address.");
+      toast.error("Please enter a valid email address.", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       return;
     }
 
@@ -113,8 +159,18 @@ const StudentsPage = () => {
       );
 
       if (isDuplicateName || isDuplicateRoll) {
-        alert(
-          "A student with the same First Name, Last Name or same Class, Section, and Roll Number already exists."
+        toast.error(
+          "A student with the same First Name, Last Name or same Class, Section, and Roll Number already exists.",
+          {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          }
         );
         return;
       }
@@ -123,12 +179,30 @@ const StudentsPage = () => {
       if (isEditing) {
         const studentDoc = doc(db, "students", editStudentId);
         await updateDoc(studentDoc, formData);
-        alert("Student updated successfully!");
+        toast.success("Student updated successfully!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
         setIsEditing(false);
         setEditStudentId(null);
       } else {
         await addDoc(collection(db, "students"), formData);
-        alert("Student added successfully!");
+        toast.success("Student added successfully!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       }
 
       // Refresh the student list and reset the form
@@ -150,7 +224,19 @@ const StudentsPage = () => {
       });
     } catch (error) {
       console.error("Error adding/updating student: ", error);
-      alert("An error occurred while saving the data. Please try again.");
+      toast.success(
+        "An error occurred while saving the data. Please try again.",
+        {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        }
+      );
     }
   };
 
@@ -190,11 +276,32 @@ const StudentsPage = () => {
     try {
       const studentDoc = doc(db, "students", studentToDelete.id);
       await deleteDoc(studentDoc);
-      alert("Student deleted successfully!");
+      toast.success("Student deleted successfully!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       fetchStudents();
     } catch (error) {
       console.error("Error deleting student: ", error);
-      alert("An error occurred while deleting the student. Please try again.");
+      toast.error(
+        "An error occurred while deleting the student. Please try again.",
+        {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        }
+      );
     } finally {
       setIsDeleteDialogOpen(false);
       setStudentToDelete(null);
