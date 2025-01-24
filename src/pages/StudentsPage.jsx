@@ -27,7 +27,7 @@ const StudentsPage = () => {
     section: "",
     rollNumber: "",
     dob: "",
-    parentName: "",
+    middleName: "",
     contactNumber: "",
     address: "",
     gender: "",
@@ -141,7 +141,7 @@ const StudentsPage = () => {
         section: "",
         rollNumber: "",
         dob: "",
-        parentName: "",
+        middleName: "",
         contactNumber: "",
         address: "",
         gender: "",
@@ -172,7 +172,7 @@ const StudentsPage = () => {
       section: "",
       rollNumber: "",
       dob: "",
-      parentName: "",
+      middleName: "",
       contactNumber: "",
       address: "",
       gender: "",
@@ -231,16 +231,16 @@ const StudentsPage = () => {
           </button>
         </nav>
         {isSideBarOpen && (
-          <nav className="flex flex-col space-y-2 mt-4 pt-2">
+          <nav className="flex flex-col space-y-2  pt-2">
             <button
               onClick={() => navigate("/students")}
-              className="flex items-center    gap-2 w-full px-4 py-2 text-left text-gray-300 hover:bg-gray-700 cursor-pointer hover:text-white transition-colors duration-300"
+              className="flex items-center justify-center   gap-2 w-full px-4 py-2 text-left text-gray-300 hover:bg-gray-700 cursor-pointer hover:text-white transition-colors duration-300"
             >
               <BookUser /> Students Page
             </button>
             <button
               onClick={handleLogout}
-              className="flex items-center justify-center  gap-2 w-full px-4 py-2 text-left cursor-pointer text-white bg-red-700 hover:bg-red-600 hover:text-white transition-colors duration-300"
+              className="flex items-center justify-center  gap-2 w-full px-4 py-4 mt-2 text-left cursor-pointer text-white bg-red-700 hover:bg-red-600 hover:text-white transition-colors duration-300"
             >
               <LogOut /> Logout
             </button>
@@ -352,8 +352,8 @@ const StudentsPage = () => {
                     </label>
                     <input
                       type="text"
-                      name="parentName"
-                      value={formData.parentName}
+                      name="middleName"
+                      value={formData.middleName}
                       onChange={handleInputChange}
                       className="border px-2 py-1 rounded col-span-2"
                     />
@@ -376,7 +376,6 @@ const StudentsPage = () => {
                       onChange={handleInputChange}
                       className="border px-2 py-1 rounded col-span-2"
                     >
-                      <option value="">Select</option>
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
                     </select>
@@ -495,22 +494,46 @@ const StudentsPage = () => {
         {/* View Student Modal */}
         {isViewModalOpen && (
           <div
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center "
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
             style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}
           >
-            <div className="bg-white p-6 rounded-lg shadow-lg w-[90%] lg:w-1/2 h-[90%] lg:h-fit overflow-y-auto">
-              <h2 className="text-xl font-bold mb-4">Student Details</h2>
+            <div className="bg-white p-6 rounded-lg shadow-lg w-[90%] lg:w-1/2 max-h-[90%] overflow-y-auto">
+              <h2 className="text-xl font-bold mb-4 text-gray-800 border-b pb-2 border-gray-200 flex items-center gap-2">
+                Student Details{" "}
+                <p className="text-slate-500 font-extralight text-[15px]">
+                  (ID: {viewStudent.id})
+                </p>
+              </h2>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                {Object.entries(viewStudent || {}).map(([key, value]) => (
-                  <div key={key}>
-                    <strong>
-                      {key.charAt(0).toUpperCase() + key.slice(1)}:
+                {[
+                  "firstName",
+                  "lastName",
+                  "middleName",
+                  "gender",
+                  "contactNumber",
+                  "email",
+                  "dob",
+                  "class",
+                  "section",
+                  "rollNumber",
+                  "admissionDate",
+                  "address",
+                ].map((key) => (
+                  <div key={key} className="border-b border-gray-200 pb-2">
+                    <strong className="text-gray-700">
+                      {key === "dob"
+                        ? "Date of Birth"
+                        : key.charAt(0).toUpperCase() +
+                          key.slice(1).replace(/([A-Z])/g, " $1")}
+                      :
                     </strong>
-                    <p>{value}</p>
+                    <p className="text-gray-900">
+                      {viewStudent?.[key] || "N/A"}
+                    </p>
                   </div>
                 ))}
               </div>
-              <div className="flex justify-end mt-4">
+              <div className="flex justify-end mt-4 pt-4 border-t border-gray-200">
                 <button
                   onClick={() => setIsViewModalOpen(false)}
                   className="cursor-pointer px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition-colors duration-300"
@@ -541,13 +564,13 @@ const StudentsPage = () => {
               <div className="flex justify-end mt-4 space-x-2">
                 <button
                   onClick={() => setIsDeleteDialogOpen(false)}
-                  className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors duration-300"
+                  className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors duration-300 cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleDelete}
-                  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-300"
+                  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-300 cursor-pointer"
                 >
                   Delete
                 </button>
