@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+.modalBg {
+    background-color: black 0.5;
+}
