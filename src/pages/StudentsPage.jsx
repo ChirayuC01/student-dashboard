@@ -249,7 +249,7 @@ const StudentsPage = () => {
                   <td className="border px-4 py-2">{student.class}</td>
                   <td className="border px-4 py-2">{student.section}</td>
                   <td className="border px-4 py-2">{student.rollNumber}</td>
-                  <td className="border px-4 py-2 space-y-2 md:space-x-2 ">
+                  <td className="border px-4 py-2 space-y-2 sm:space-x-2 ">
                     <button
                       onClick={() => handleView(student)}
                       className="px-2 py-1 bg-green-600 text-white rounded hover:bg-green-700"
@@ -278,154 +278,162 @@ const StudentsPage = () => {
         {/* Add/Edit Student Modal */}
         {isModalOpen && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-            <div className="bg-white p-6 rounded w-1/2">
+            <div className="bg-white p-6 rounded w-[80%] lg:w-[60%] h-[95%] sm:h-fit overflow-y-auto">
               <h2 className="text-xl font-bold mb-4">
                 {isEditing ? "Edit Student" : "Add Student"}
               </h2>
               <form onSubmit={handleFormSubmit} className="space-y-4">
-                <div className="flex flex-col md:grid md:grid-cols-2">
-                  <label className="text-sm font-bold mb-1">First Name</label>
-                  <input
-                    type="text"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleInputChange}
-                    className="border px-2 py-1 rounded"
-                  />
-                </div>
-                <div className="flex flex-col md:grid md:grid-cols-2">
-                  <label className="text-sm font-bold mb-1">Last Name</label>
-                  <input
-                    type="text"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleInputChange}
-                    className="border px-2 py-1 rounded"
-                  />
-                </div>
-                <div className="flex flex-col md:grid md:grid-cols-2">
-                  <label className="text-sm font-bold mb-1">Class</label>
-                  <input
-                    type="text"
-                    name="class"
-                    value={formData.class}
-                    onChange={handleInputChange}
-                    className="border px-2 py-1 rounded"
-                  />
-                </div>
-                <div className="flex flex-col md:grid md:grid-cols-2">
-                  <label className="text-sm font-bold mb-1">Section</label>
-                  <input
-                    type="text"
-                    name="section"
-                    value={formData.section}
-                    onChange={handleInputChange}
-                    className="border px-2 py-1 rounded"
-                  />
-                </div>
-                <div className="flex flex-col md:grid md:grid-cols-2">
-                  <label className="text-sm font-bold mb-1">Roll Number</label>
-                  <input
-                    type="number"
-                    name="rollNumber"
-                    value={formData.rollNumber}
-                    onChange={handleInputChange}
-                    className="border px-2 py-1 rounded"
-                  />
-                </div>
-                <div className="flex flex-col md:grid md:grid-cols-2">
-                  <label className="text-sm font-bold mb-1">
-                    Date of Birth
-                  </label>
-                  <input
-                    type="date"
-                    name="dob"
-                    value={formData.dob}
-                    onChange={handleInputChange}
-                    className="border px-2 py-1 rounded"
-                  />
-                </div>
-                <div className="flex flex-col md:grid md:grid-cols-2">
-                  <label className="text-sm font-bold mb-1">Parent Name</label>
-                  <input
-                    type="text"
-                    name="parentName"
-                    value={formData.parentName}
-                    onChange={handleInputChange}
-                    className="border px-2 py-1 rounded"
-                  />
-                </div>
-                <div className="flex flex-col md:grid md:grid-cols-2">
-                  <label className="text-sm font-bold mb-1">
-                    Contact Number
-                  </label>
-                  <input
-                    type="number"
-                    name="contactNumber"
-                    value={formData.contactNumber}
-                    onChange={handleInputChange}
-                    className="border px-2 py-1 rounded"
-                  />
-                </div>
-                <div className="flex flex-col md:grid md:grid-cols-2">
-                  <label className="text-sm font-bold mb-1">Address</label>
-                  <input
-                    type="text"
-                    name="address"
-                    value={formData.address}
-                    onChange={handleInputChange}
-                    className="border px-2 py-1 rounded"
-                  />
-                </div>
-                <div className="flex flex-col md:grid md:grid-cols-2">
-                  <label className="text-sm font-bold mb-1">Gender</label>
-                  <select
-                    name="gender"
-                    value={formData.gender}
-                    onChange={handleInputChange}
-                    className="border px-2 py-1 rounded"
-                  >
-                    <option value="">Select</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                  </select>
-                </div>
-                <div className="flex flex-col md:grid md:grid-cols-2">
-                  <label className="text-sm font-bold mb-1">Email</label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="border px-2 py-1 rounded"
-                  />
-                </div>
-                <div className="flex flex-col md:grid md:grid-cols-2">
-                  <label className="text-sm font-bold mb-1">
-                    Admission Date
-                  </label>
-                  <input
-                    type="date"
-                    name="admissionDate"
-                    value={formData.admissionDate}
-                    onChange={handleInputChange}
-                    className="border px-2 py-1 rounded"
-                  />
-                </div>
-                <div className="flex justify-end space-x-2">
-                  <button
-                    type="button"
-                    onClick={handleCancel}
-                    className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                  >
-                    {isEditing ? "Update" : "Submit"}
-                  </button>
+                <div className="overflow-y-auto flex flex-col gap-1">
+                  <div className="flex flex-col sm:grid sm:grid-cols-3">
+                    <label className="text-sm font-bold mb-1">First Name</label>
+                    <input
+                      type="text"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                      className="border px-2 py-1 rounded col-span-2"
+                    />
+                  </div>
+                  <div className="flex flex-col sm:grid sm:grid-cols-3">
+                    <label className="text-sm font-bold mb-1">
+                      Middle Name
+                    </label>
+                    <input
+                      type="text"
+                      name="parentName"
+                      value={formData.parentName}
+                      onChange={handleInputChange}
+                      className="border px-2 py-1 rounded col-span-2"
+                    />
+                  </div>
+                  <div className="flex flex-col sm:grid sm:grid-cols-3">
+                    <label className="text-sm font-bold mb-1">Last Name</label>
+                    <input
+                      type="text"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      className="border px-2 py-1 rounded col-span-2"
+                    />
+                  </div>
+                  <div className="flex flex-col sm:grid sm:grid-cols-3">
+                    <label className="text-sm font-bold mb-1">Gender</label>
+                    <select
+                      name="gender"
+                      value={formData.gender}
+                      onChange={handleInputChange}
+                      className="border px-2 py-1 rounded col-span-2"
+                    >
+                      <option value="">Select</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    </select>
+                  </div>
+                  <div className="flex flex-col sm:grid sm:grid-cols-3">
+                    <label className="text-sm font-bold mb-1">
+                      Date of Birth
+                    </label>
+                    <input
+                      type="date"
+                      name="dob"
+                      value={formData.dob}
+                      onChange={handleInputChange}
+                      className="border px-2 py-1 rounded col-span-2"
+                    />
+                  </div>
+                  <div className="flex flex-col sm:grid sm:grid-cols-3">
+                    <label className="text-sm font-bold mb-1">
+                      Contact Number
+                    </label>
+                    <input
+                      type="number"
+                      name="contactNumber"
+                      value={formData.contactNumber}
+                      onChange={handleInputChange}
+                      className="border px-2 py-1 rounded col-span-2"
+                    />
+                  </div>
+                  <div className="flex flex-col sm:grid sm:grid-cols-3">
+                    <label className="text-sm font-bold mb-1">Email</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="border px-2 py-1 rounded col-span-2"
+                    />
+                  </div>
+                  <div className="flex flex-col sm:grid sm:grid-cols-3">
+                    <label className="text-sm font-bold mb-1">Address</label>
+                    <input
+                      type="text"
+                      name="address"
+                      value={formData.address}
+                      onChange={handleInputChange}
+                      className="border px-2 py-1 rounded col-span-2"
+                    />
+                  </div>
+
+                  <div className="flex flex-col sm:grid sm:grid-cols-3">
+                    <label className="text-sm font-bold mb-1">Class</label>
+                    <input
+                      type="text"
+                      name="class"
+                      value={formData.class}
+                      onChange={handleInputChange}
+                      className="border px-2 py-1 rounded col-span-2"
+                    />
+                  </div>
+                  <div className="flex flex-col sm:grid sm:grid-cols-3">
+                    <label className="text-sm font-bold mb-1">Section</label>
+                    <input
+                      type="text"
+                      name="section"
+                      value={formData.section}
+                      onChange={handleInputChange}
+                      className="border px-2 py-1 rounded col-span-2"
+                    />
+                  </div>
+                  <div className="flex flex-col sm:grid sm:grid-cols-3">
+                    <label className="text-sm font-bold mb-1">
+                      Roll Number
+                    </label>
+                    <input
+                      type="number"
+                      name="rollNumber"
+                      value={formData.rollNumber}
+                      onChange={handleInputChange}
+                      className="border px-2 py-1 rounded col-span-2"
+                    />
+                  </div>
+
+                  <div className="flex flex-col sm:grid sm:grid-cols-3">
+                    <label className="text-sm font-bold mb-1">
+                      Admission Date
+                    </label>
+                    <input
+                      type="date"
+                      name="admissionDate"
+                      value={formData.admissionDate}
+                      onChange={handleInputChange}
+                      className="border px-2 py-1 rounded col-span-2"
+                    />
+                  </div>
+                  <div className="flex justify-end space-x-2">
+                    <button
+                      type="button"
+                      onClick={handleCancel}
+                      className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                    >
+                      {isEditing ? "Update" : "Submit"}
+                    </button>
+                  </div>
                 </div>
               </form>
             </div>
@@ -434,10 +442,10 @@ const StudentsPage = () => {
 
         {/* View Student Modal */}
         {isViewModalOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center overflow-y-auto modalBg">
-            <div className="bg-white p-6 rounded lg:w-1/2 ">
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center ">
+            <div className="bg-white p-6 rounded w-[90%] lg:w-1/2 h-[90%] lg:h-fit overflow-y-auto ">
               <h2 className="text-xl font-bold mb-4">Student Details</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 {Object.entries(viewStudent || {}).map(([key, value]) => (
                   <div key={key}>
                     <strong>
@@ -462,7 +470,7 @@ const StudentsPage = () => {
         {/* Delete Confirmation Dialog */}
         {isDeleteDialogOpen && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-            <div className="bg-white p-6 rounded w-1/3">
+            <div className="bg-white p-6 rounded w-[90%] sm:w-1/3">
               <h2 className="text-xl font-bold mb-4">Confirm Delete</h2>
               <p>
                 Are you sure you want to delete
