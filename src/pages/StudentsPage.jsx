@@ -10,7 +10,16 @@ import {
   updateDoc,
   deleteDoc,
 } from "firebase/firestore";
-import { BookUser, Plus, LogOut, Gauge, AlignJustify } from "lucide-react";
+import {
+  BookUser,
+  Plus,
+  LogOut,
+  Gauge,
+  AlignJustify,
+  Eye,
+  Pencil,
+  Trash2,
+} from "lucide-react";
 import { toast } from "react-toastify";
 
 const StudentsPage = () => {
@@ -410,19 +419,19 @@ const StudentsPage = () => {
                       onClick={() => handleView(student)}
                       className="cursor-pointer px-3 py-1 bg-green-500 text-white text-xs font-medium rounded-lg hover:bg-green-600 transition-colors duration-300"
                     >
-                      View
+                      <Eye />
                     </button>
                     <button
                       onClick={() => handleEdit(student)}
                       className="cursor-pointer px-3 py-1 bg-yellow-500 text-white text-xs font-medium rounded-lg hover:bg-yellow-600 transition-colors duration-300"
                     >
-                      Edit
+                      <Pencil />
                     </button>
                     <button
                       onClick={() => confirmDelete(student)}
                       className="cursor-pointer px-3 py-1 bg-red-500 text-white text-xs font-medium rounded-lg hover:bg-red-600 transition-colors duration-300"
                     >
-                      Delete
+                      <Trash2 />
                     </button>
                   </td>
                 </tr>
