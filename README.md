@@ -1,6 +1,6 @@
 # Student Dasboard
 
-This project is a React-based web application created as part of an internship assignment. It includes a simple login system, a student management dashboard, and integration with Firebase for authentication and Firestore for data storage.  
+This project is a React-based web application. It includes a simple login system, a student management dashboard, and integration with Firebase for authentication and Firestore for data storage.  
 
 ## Features  
 
